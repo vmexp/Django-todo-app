@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!--style-->
+<style>
+.card {
+
+ box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5),
+             0 6px 20px 0 rgba(0,0,0,0.39);
+ background: lightpink;
+ margin-bottom : 5%;
+ border-radius: 25px;
+ padding : 2%;
+ overflow: auto;
+ resize: both;
+ text-overflow: ellipsis;
+ margin: 5%;
+ width: 50%;
+ 
+}
+.card:hover{
+  background: lightblue;
+}
+
+.submit_form{
+
+  text-align: center;
+  padding: 1%;
+  background: pink;
+  border-radius: 25px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4),
+              0 6px 20px 0 rgba(0,0,0,0.36);
+}
+</style>
+
+</head>
+<body>
+
+<div class="card">
+    <h1>Welcome to Todo Page!</h1>
+<ul>
+    <!-- <li>todo 1</li>
+    <li>todo 2</li> -->
+    {% for todo_items in all_items %}
+        <li>{{todo_items.content}}
+            <form action="/deleteTodo/{{todo_items.id}}/" style="display: inline;" method="POST">{% csrf_token %}
+                <input type="submit" value="delete">
+            </form>
+        </li>
+    {% endfor %}
+
+    <form action="/addTodo/" method="POST">{% csrf_token %}
+        <input type="text" name ="content"/>
+        <input type = "submit" class="submit_form" value="add"/>
+    </form>
+
+</ul>
+</div>
+
+</body>
